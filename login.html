@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            width: 800px;
+            height: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+        .home{
+            font-weight: bold;
+            padding: 9px;
+            
+        }
+        .home a{
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .image-section {
+            flex: 1;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .form-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .form-section h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-section form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-section input {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-section button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color:  coral;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-section button:hover {
+            background-color: orangered;
+        }
+
+        .form-section .toggle {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .form-section .toggle a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .form-section .toggle a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-section" id="image-section" style="background-image: url('//dm6g3jbka53hp.cloudfront.net/static-images/login-pet-09042021.jpg');"></div>
+        <div class="form-section">
+            <h2 id="form-title">Login</h2>
+            <form id="auth-form">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Submit</button>
+                <div class="toggle">
+                    <span id="toggle-text">Don't have an account? </span>
+                    <a href="#" id="toggle-link">Sign Up</a>
+                  
+                </div>
+            </form>
+        </div>
+        <div class="home"><a href="/index.html"> Back to 🏠 </a></div>
+    </div>
+
+    <script>
+        const formTitle = document.getElementById('form-title');
+        const authForm = document.getElementById('auth-form');
+        const toggleText = document.getElementById('toggle-text');
+        const toggleLink = document.getElementById('toggle-link');
+        const imageSection = document.getElementById('image-section');
+
+        let isLogin = true;
+
+        toggleLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            isLogin = !isLogin;
+
+            if (isLogin) {
+                formTitle.textContent = 'Login';
+                toggleText.textContent = "Don't have an account? ";
+                toggleLink.textContent = 'Sign Up';
+                imageSection.style.backgroundImage = "url('//dm6g3jbka53hp.cloudfront.net/static-images/login-pet-09042021.jpg')";
+                authForm.innerHTML = `
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit">Submit</button>
+                    <div class="toggle">
+                        <span id="toggle-text">Don't have an account? </span>
+                        <a href="#" id="toggle-link">Sign Up</a>
+                    </div>
+                `;
+            } else {
+                formTitle.textContent = 'Sign Up';
+                toggleText.textContent = 'Already have an account? ';
+                toggleLink.textContent = 'Login';
+                imageSection.style.backgroundImage = "url('//dm6g3jbka53hp.cloudfront.net/static-images/signup-pet-09042021.jpg')";
+                authForm.innerHTML = `
+                    <input type="text" id="name" placeholder="Name" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit">Submit</button>
+                    <div class="toggle">
+                        <span id="toggle-text">Already have an account? </span>
+                        <a href="#" id="toggle-link">Login</a>
+                    </div>
+                `;
+            }
+
+            // Reattach event listener to new toggle link
+            document.getElementById('toggle-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleLink.click();
+            });
+        });
+    </script>
+</body>
+</html>
